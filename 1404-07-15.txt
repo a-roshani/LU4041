@@ -1,0 +1,24 @@
+#---- 1404-07-15
+
+
+pHat = 0.462
+n = 1810
+alpha = 0.05
+
+pHat - qnorm(1-alpha/2) * sqrt(pHat*(1-pHat)/n)
+pHat + qnorm(1-alpha/2) * sqrt(pHat*(1-pHat)/n)
+
+#---
+
+fx = function(x){
+  (0.9-x)/sqrt(x*(1-x)/10) - 1.96
+}
+
+uniroot(fx, lower = 0.0001, upper = 0.9999)$root
+
+gx = function(x){
+  (0.9-x)/sqrt(x*(1-x)/10) + 1.96
+}
+
+uniroot(gx, lower = 0.0001, upper = 0.9999)$root
+

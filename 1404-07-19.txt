@@ -1,0 +1,80 @@
+# ----- 1404-07-19
+
+# 1- Wald Confidence Interval (asymptotic)
+
+y = 9
+n = 10
+pi0 = 0.5
+piHat = y/n
+alpha = 0.05
+
+SE = sqrt(piHat * (1-piHat)/n)
+SE
+piHat - qnorm(1-alpha/2) * SE
+piHat + qnorm(1-alpha/2) * SE
+
+library(binom)
+binom.confint(9,10, conf.level = 0.95, methods = "asymp")
+binom.asymp(9,10, conf.level = 0.95)
+
+# 2- Score Confidence Interval (Wilson)
+
+fx = function(x){
+  (0.9-x)/sqrt(x*(1-x)/10) - 1.96
+}
+
+uniroot(fx, lower = 0.0001, upper = 0.9999)$root
+
+gx = function(x){
+  (0.9-x)/sqrt(x*(1-x)/10) + 1.96
+}
+
+uniroot(gx, lower = 0.0001, upper = 0.9999)$root
+
+#
+
+binom.confint(9, 10, methods = "wilson")
+binom.wilson(9, 10)
+
+# or
+
+a = prop.test(9,10,0.5,correct = F)
+a$conf.int
+
+# 3- Agresti-Coull Interval
+
+binom.confint(9, 10, methods = "agresti-coull")
+binom.agresti.coull(9, 10)
+
+# all CI 
+
+binom.confint(9, 10)
+
+#--------------------------------------------#
+
+# 1- Wald test
+
+y = 9
+n = 10
+pi0 = 0.5
+piHat = y/n
+alpha = 0.05
+
+SE = sqrt(piHat * (1-piHat)/n)
+z = (piHat - pi0)/SE
+z
+
+X2 = z^2
+X2 > qchisq(1-alpha, df = 1)
+
+pv = 2*(1-pnorm(abs(z)))
+pv
+pv < alpha
+
+# 2- Score test
+
+a = prop.test(9,10,0.5,correct = F)
+st = sqrt(a$statistic)
+2*(1-pnorm(abs(st)))
+
+choose(10,9)

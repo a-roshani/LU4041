@@ -1,0 +1,37 @@
+
+
+dbinom(0, 10, 0.2)
+dbinom(1, 10, 0.2)
+dbinom(0:10, 10, 0.2)
+dbinom(0:10, 10, 0.5)
+dbinom(0:10, 10, 0.8)
+
+y = rbinom(100000, 10, 0.2)
+mean(y)
+10*0.2*0.8
+var(y)
+sd(y)
+
+# -----
+
+y = rbinom(100000, 10, 0.5)
+table(y)/100000
+
+plot(table(y)/100000)
+
+
+# ----
+
+library(stats)
+dmultinom(c(2,4,4), size = 10, c(0.1,0.5,0.4))
+
+
+# 
+
+p9 = dbinom(9, size = 10, prob = 0.5)
+p10= dbinom(10, size = 10, prob = 0.5)
+
+p9 + p10
+
+pbinom(10, size = 10, prob = 0.5)
+rbinom(20,size = 10,prob = 0.5)

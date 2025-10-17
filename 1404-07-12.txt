@@ -1,0 +1,23 @@
+## ==== 1404-07-12
+
+fx = function(p){
+  (1-p)^10
+}
+
+fx(0.4)
+fx(0.2)
+fx(0)
+
+curve(fx, 0, 1)
+
+gx = function(p){
+  choose(10,6)*p^6*(1-p)^4
+}
+
+curve(gx,0,1, add = TRUE)
+
+pnorm(-3.2) + (1-pnorm(3.2))
+pnorm(-3.2) + pnorm(3.2, lower.tail = F)
+
+2*min(c(pnorm(-3.2) , 1-pnorm(-3.2)))
+

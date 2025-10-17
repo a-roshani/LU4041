@@ -1,0 +1,37 @@
+# ----- 1404-07-22
+
+# 3- Likelihood Ratio Test (LRT)
+
+lik = function(p){
+  10 * p^9 *(1-p)
+}
+
+(l0 = lik(0.5))
+l1 = lik(0.9)
+
+
+LRT = 2*log(l1/l0)
+LRT
+
+alpha = 0.05
+qchisq(1-alpha, df = 1)
+
+LRT > qchisq(1-alpha, df = 1)
+
+pv = (1-pchisq(LRT,df = 1))
+pv < alpha
+
+# 4- Exact test
+
+binom.test(9,10,0.5)
+binom.test(9,10,0.5,alternative = "g")
+binom.test(9,10,0.5,alternative = "l")
+binom.test(9,10,0.5,alternative = "t",conf.level = 0.95)
+
+# mid P-value
+install.packages("exactci")
+library(exactci)
+binom.exact(9,10,midp = T)
+binom.exact(9,10,midp = T, alternative = "g")
+
+
